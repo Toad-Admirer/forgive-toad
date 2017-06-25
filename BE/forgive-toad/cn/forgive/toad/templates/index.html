@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    room:
+    <input id="roomId" type="text" value="">
+    <button onclick="selectRoom()">selectRoom</button>
+    <input id="content" type="text" value="">
+    <button onclick="sendMsg()">send</button>
+    <div id="message"></div>
+</body>
+<script>
+    var ws;
+    function selectRoom() {
+        if(ws) ws.close()
+        var roomId = $("#roomId").val();
+        var url = "ws://localhost:8080/room/"+roomId;
+        ws = new WebSocket(url)
+        ws.onopen = function () {
+            console.log("ws open:"+url)
+        }
+        ws.onmessage=function (evt){
+            console.log(evt.data)
+            $("#message").append('<p>'+evt.data+'</p>')
+        }
+    }
+
+    function sendMsg() {
+        var msg = $("#content").val();
+        ws.send(msg)
+    }
+</script>
+</html>

@@ -1,5 +1,5 @@
 var tankPic = new Image();
-tankPic.src = './tanks_sheet.png';
+tankPic.src = '../tanks_sheet.png';
 var animationFrames = [1,2,3,4,5,6,7,8];
 var frameIndex = 0;
 var canvasEle =  document.querySelector('canvas');

@@ -16,16 +16,15 @@
 <script>
     var ws;
     function selectRoom() {
-        if(ws) ws.close()
+        if (ws) ws.close()
         var roomId = $("#roomId").val();
-        var url = "ws://localhost:8080/room/"+roomId;
+        var url = "ws://localhost:8080/room/" + roomId;
         ws = new WebSocket(url)
         ws.onopen = function () {
-            console.log("ws open:"+url)
+            console.log("ws open:" + url)
         }
-        ws.onmessage=function (evt){
-            console.log(evt.data)
-            $("#message").append('<p>'+evt.data+'</p>')
+        ws.onmessage = function (evt) {
+            $("#message").append('<p>' + evt.data + '</p>')
         }
     }
 

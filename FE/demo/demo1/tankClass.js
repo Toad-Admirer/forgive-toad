@@ -8,8 +8,8 @@ window.Tank = class Tank{
         //帧位置，显示不同的贴图
         this.frameIndex = 0;
         //加速度
-        this.dx = 4;
-        this.dy = 4;
+        this.dx = 2;
+        this.dy = 2;
     }
     go(face){
         switch (true) {

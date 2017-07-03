@@ -8,10 +8,32 @@ window.Tank = class Tank{
         //帧位置，显示不同的贴图
         this.frameIndex = 0;
         //加速度
-        this.dx = 1;
-        this.dy = 1;
+        this.dx = 4;
+        this.dy = 4;
     }
-    // go(font){
-    //     改变实例的参数
-    // }
+    go(face){
+        switch (true) {
+            case face === 'front':
+                this.positionY -= this.dy
+                this.face = 'front';
+                break;
+            case face === 'left':
+                this.positionX -= this.dx
+                this.face = 'left';
+                break;
+            case face === 'right':
+                this.positionX += this.dx
+                this.face = 'right';
+                break;
+            case face === 'back':
+                this.positionY += this.dy
+                this.face = 'back';
+                break;
+            default:
+        }
+        this.frameIndex++;
+        if(this.frameIndex == 8){
+            this.frameIndex =0 ;
+        }
+    }
 }

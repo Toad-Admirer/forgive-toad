@@ -18,12 +18,29 @@ class RenderEngine{
         this.pic.src = '../tanks_sheet.png';
     }
     initTank(){
-        this.tankList.push(new Tank(50,50));
+        this.selfTank = new Tank(50,50);
+        this.tankList.push(this.selfTank);
     }
     bindEvent(){
-        window.addEventListener('keypress',()=>{
-            console.log(1)
-            // todo 根据上下左右调用tank go 方法
+        let {selfTank} = this;
+        window.addEventListener('keypress',(e)=>{
+            let {keyCode} = e;
+            switch (true) {
+                case keyCode == 119: //前 W
+                    selfTank.go('front')
+                    break;
+                case keyCode == 97: //左 A
+                    selfTank.go('left')
+                    break;
+                case keyCode == 115: // 后S
+                    selfTank.go('back')
+                    break;
+                case keyCode == 100: //右 D
+                    selfTank.go('right')
+                    break;
+                default:
+                    return
+            }
         },false)
     }
     startRender(){
@@ -36,14 +53,13 @@ class RenderEngine{
         context.fillRect(0,0,600,600);
         this.tankList.forEach((el)=>{
             let {face,positionX,positionY,frameIndex} =el,
-            faceList = ['front','left','right','back'],
+            faceList = ['front','right','back','left'],
             animationFrames = [1,2,3,4,5,6,7,8],
             sourceX = Math.floor(animationFrames[frameIndex] % 8)*32,
             sourceY = Math.floor(animationFrames[frameIndex] /8)*32;
             context.save()
             context.translate(positionX+16,positionY+16);
-            console.log(faceList.indexOf(face)*Math.PI/4)
-            context.rotate(faceList.indexOf(face)*Math.PI/4)
+            context.rotate(faceList.indexOf(face)*Math.PI/2)
             context.drawImage(pic,sourceX,sourceY,32,32,-16,-16,32,32)
             context.restore()
         })

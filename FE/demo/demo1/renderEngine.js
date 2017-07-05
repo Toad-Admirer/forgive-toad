@@ -62,6 +62,7 @@ class RenderEngine{
             context.rotate(faceList.indexOf(face)*Math.PI/2)
             context.drawImage(pic,sourceX,sourceY,32,32,-16,-16,32,32)
             context.restore()
+            console.log(context.getImageData(0,0,600,600))
         })
     }
 }
